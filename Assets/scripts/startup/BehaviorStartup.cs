@@ -18,13 +18,12 @@ namespace GGJ2021
 
         public void Startup()
         {
-            Debug.Log(name + " startup!");
             IStartup[] objs = GetComponentsInChildren<IStartup>();
             for (int i = 0; i < objs.Length; i++)
             {
                 objs[i].Startup();
             }
-
+            Debug.Log(LogTags.SYSTEM + " " + name + " Started! " + objs.Length + " components");
             Ready = true;
         }
         public bool Ready { get; private set; }

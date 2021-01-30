@@ -34,7 +34,7 @@ namespace PUnity.Editor
             @"using UnityEditor;
 using UnityEngine;
 
-namespace Forbidden
+namespace SomeNameSpace
 {
 
     [CustomEditor(typeof(FOR_TYPE))]

@@ -9,6 +9,7 @@ namespace GGJ2021
         public void Start()
         {
             Debug.Log(LogTags.SYSTEM + "Scene startup!");
+            RoboGame.tools.ClearTools();
 
             BehaviorStartup[] objs = FindObjectsOfType<BehaviorStartup>();
             objs = objs.OrderBy(x => x.Priority).ToArray();

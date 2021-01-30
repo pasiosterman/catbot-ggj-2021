@@ -15,7 +15,7 @@ namespace PUnity
                 if (Tools.ContainsKey(key))
                     return (K)Tools[key];
                 else
-                    return default(K);
+                    return default;
             }
             catch (InvalidCastException e)
             {
@@ -26,18 +26,12 @@ namespace PUnity
 
         public void SetTool(T key, object tool)
         {
-            if (!Tools.ContainsKey(key))
-                Tools[key] = tool;
-            else
-                Tools.Add(key, tool);
+            Tools[key] = tool;
         }
 
         public bool ContainsTool(T key)
         {
-            if (Tools.ContainsKey(key) && Tools[key] != null)
-                return true;
-            else
-                return false;
+            return Tools.ContainsKey(key) && Tools[key] != null;
         }
 
         public void ClearTools()
