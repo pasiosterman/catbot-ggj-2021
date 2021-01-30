@@ -27,6 +27,7 @@ namespace GGJ2021
         private Vector3 _previousVelocity = Vector3.zero;
 
         public Vector3 DesiredMovement { get; set; } = Vector3.zero;
+        public Vector3 MovementDirection { get; private set; }
         public float DesiredTurning { get; set; } = 0.0f;
         public bool WantsToRun { get; set; }
         public bool WantsToJump { get; set; }
@@ -98,10 +99,12 @@ namespace GGJ2021
 
             var velocity = _rb.velocity;
             var velocityChange = desiredVeloicty - velocity;
+
             velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0;
             _rb.AddForce(velocityChange, ForceMode.VelocityChange);
+            MovementDirection = velocityChange.normalized;
 
             if (IsGrounded && _jumpDelay <= 0)
             {
