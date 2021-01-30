@@ -10,7 +10,7 @@ namespace GGJ2021
         public Vector3 MovementInput { get; private set; }
         public bool RunInput { get; private set; }
         public bool JumpInput { get; private set; }
-        public float TurnInput {get; private set; }
+        public float TurnInput { get; private set; }
 
         public void Startup()
         {
@@ -24,7 +24,7 @@ namespace GGJ2021
             if (!_behaviorStartup.Ready) return;
             if (RoboGame.PlayerMover == null) return;
 
-            if(Input.GetKey(KeyCode.Escape))
+            if (Input.GetKey(KeyCode.Escape))
                 Application.Quit();
 
             if (!InputLock)
@@ -41,6 +41,11 @@ namespace GGJ2021
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.Overhead);
                     else if (Input.GetKey(KeyCode.F2))
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.FirstPerson);
+                    else if (Input.GetKey(KeyCode.F3))
+                        RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.ThirdPerson);
+                    else if (Input.GetKey(KeyCode.F4))
+                        RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.Ortoh);
+
                 }
             }
             else

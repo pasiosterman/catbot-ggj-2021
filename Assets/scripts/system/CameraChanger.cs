@@ -6,6 +6,8 @@ namespace GGJ2021
     {
         public Camera overheadCamera;
         public Camera fpsCamera;
+        public Camera orthoCamera;
+        public Camera thirdPerson;
 
         public AvailableCameras CurrentCamera { get; private set; }
 
@@ -26,17 +28,35 @@ namespace GGJ2021
                 case AvailableCameras.Overhead:
                     overheadCamera.gameObject.SetActive(true);
                     fpsCamera.gameObject.SetActive(false);
+                    orthoCamera.gameObject.SetActive(false);
+                    thirdPerson.gameObject.SetActive(false);
                     break;
                 case AvailableCameras.FirstPerson:
                     overheadCamera.gameObject.SetActive(false);
                     fpsCamera.gameObject.SetActive(true);
+                    orthoCamera.gameObject.SetActive(false);
+                    thirdPerson.gameObject.SetActive(false);
+                    break;
+                case AvailableCameras.Ortoh:
+                    overheadCamera.gameObject.SetActive(false);
+                    fpsCamera.gameObject.SetActive(false);
+                    orthoCamera.gameObject.SetActive(true);
+                    thirdPerson.gameObject.SetActive(false);
+                    break;
+                case AvailableCameras.ThirdPerson:
+                    overheadCamera.gameObject.SetActive(false);
+                    fpsCamera.gameObject.SetActive(false);
+                    orthoCamera.gameObject.SetActive(false);
+                    thirdPerson.gameObject.SetActive(true);
                     break;
                 default:
                     overheadCamera.gameObject.SetActive(true);
-                    fpsCamera.gameObject.SetActive(true);
+                    fpsCamera.gameObject.SetActive(false);
+                    orthoCamera.gameObject.SetActive(false);
+                    thirdPerson.gameObject.SetActive(false);
                     break;
             }
         }
-        public enum AvailableCameras { Overhead, FirstPerson }
+        public enum AvailableCameras { Overhead, FirstPerson, Ortoh, ThirdPerson }
     }
 }
