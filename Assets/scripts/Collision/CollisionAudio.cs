@@ -5,7 +5,6 @@ namespace GGJ2021
     public class CollisionAudio : MonoBehaviour, IStartup
     {
         private OneShotSoundEffectPlayer _effectPlayer;
-
         private float _timeStamp = -100.0f;
 
         public void Startup()

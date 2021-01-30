@@ -26,7 +26,7 @@ namespace GGJ2021
 
         public void AddModule(RobotModule module)
         {
-            if (!modules.Contains(module))
+            if (!modules.Contains(module) && module != null)
             {
                 modules.Add(module);
                 if(CurrenModule == null)
