@@ -18,7 +18,7 @@ namespace GGJ2021
         }
 
         [ContextMenu("Play oneshot random")]
-        public void TestPlayRandomOneShot()
+        public void PlayRandomOneShot()
         {
             if (effects.Length == 0) return;
 

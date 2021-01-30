@@ -11,8 +11,11 @@ namespace GGJ2021
 
         public void HandleEvent(object sender, MovementEventArgs eventArgs)
         {
-            if(eventArgs.GetType() == typeof(LandedEventArgs))
+            if (eventArgs.GetType() == typeof(LandedEventArgs))
             {
+                if (Time.time < 0.3f)
+                    return;
+
                 _effectPlayer.PlayOneShot("landed");
             }
         }
