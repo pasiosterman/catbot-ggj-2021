@@ -210,6 +210,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b32c2c896bde734580c14ca7339dd63, type: 3}
+--- !u!1 &489332408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6687752994624360104, guid: 0d27e8371f1f91542aed1a36e72dc4fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 3144559238936700014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &489332410
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489332408}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3, y: 1, z: 1.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &525371909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -663,6 +682,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1762474039663200531, guid: 0d27e8371f1f91542aed1a36e72dc4fd,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762474039663200531, guid: 0d27e8371f1f91542aed1a36e72dc4fd,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762474039663200531, guid: 0d27e8371f1f91542aed1a36e72dc4fd,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762474039663200531, guid: 0d27e8371f1f91542aed1a36e72dc4fd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1762474039663200531, guid: 0d27e8371f1f91542aed1a36e72dc4fd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.14
+      objectReference: {fileID: 0}
     - target: {fileID: 3144559239329686950, guid: 0d27e8371f1f91542aed1a36e72dc4fd,
         type: 3}
       propertyPath: FollowTransform
@@ -742,6 +786,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7200510779459621671, guid: 0d27e8371f1f91542aed1a36e72dc4fd,
+        type: 3}
+      propertyPath: carryTransform
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8222744133439175420, guid: 0d27e8371f1f91542aed1a36e72dc4fd,
         type: 3}

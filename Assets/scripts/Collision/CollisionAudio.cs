@@ -13,6 +13,11 @@ namespace GGJ2021
             _effectPlayer = GetComponent<OneShotSoundEffectPlayer>();
         }
 
+        public void SetCooldownTimestamp()
+        {
+            _timeStamp = Time.time;
+        }
+
         private void OnCollisionEnter(Collision other)
         {
             if(Time.time < 0.3) return;
@@ -20,7 +25,7 @@ namespace GGJ2021
             if (_effectPlayer != null && (Time.time - _timeStamp) > 3.0f)
             {
                 _effectPlayer.PlayRandomOneShot();
-                _timeStamp = Time.time;
+                SetCooldownTimestamp();
             }
         }
     }

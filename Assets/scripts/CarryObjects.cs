@@ -4,38 +4,57 @@ using UnityEngine;
 
 namespace GGJ2021
 {
-    public class CarryObjects : MonoBehaviour
+    public class CarryObjects : RobotModule, IStartup
     {
-        public Transform carryTransform;
         private readonly List<IPickable> pickablesNearby = new List<IPickable>();
-
         public IPickable CurrentPickable { get; private set; }
 
-        public void PickUpNearest()
+        public override void UseModule()
         {
+            if(CurrentPickable == null)
+                PickUpNearest();
+            else
+                DropCurrentPickable();
+        }
+
+        private void DropCurrentPickable()
+        {
+            CurrentPickable.transform.SetParent(null);
+            CurrentPickable.transform.position = transform.position + transform.forward;
+            CurrentPickable.OnPutDown();
+            CurrentPickable = null;
+        }
+
+        private void PickUpNearest()
+        {
+            if (CurrentPickable != null)
+                return;
+
             IPickable nearest = GetNearestPickable();
-            if(nearest != null)
+            if (nearest != null)
             {
-                nearest.OnPickUp();
-                nearest.transform.SetParent(carryTransform);
-                nearest.transform.position = Vector3.zero;
+                CurrentPickable = nearest;
+                CurrentPickable.OnPickUp();
+                CurrentPickable.transform.SetParent(transform);
+                CurrentPickable.transform.localPosition = Vector3.zero;
+                CurrentPickable.transform.forward = transform.forward;
             }
         }
 
         public IPickable GetNearestPickable()
         {
-            if(pickablesNearby.Count == 0) return null;
+            if (pickablesNearby.Count == 0) return null;
 
             IPickable nearest = pickablesNearby[0];
             float nearestDist = Vector3.Distance(nearest.transform.position, transform.position);
 
-            if(pickablesNearby.Count == 1)
+            if (pickablesNearby.Count == 1)
                 return nearest;
 
             for (int i = 1; i < pickablesNearby.Count; i++)
             {
                 float dist = Vector3.Distance(pickablesNearby[i].transform.position, transform.position);
-                if(dist < nearestDist)
+                if (dist < nearestDist)
                 {
                     nearest = pickablesNearby[i];
                     nearestDist = dist;
@@ -47,6 +66,9 @@ namespace GGJ2021
         private void OnTriggerEnter(Collider other)
         {
             IPickable pickable = other.GetComponent<IPickable>();
+            if (pickable == null)
+                pickable = other.GetComponentInParent<IPickable>();
+
             if (pickable != null && !pickablesNearby.Contains(pickable))
             {
                 pickablesNearby.Add(pickable);
@@ -61,6 +83,11 @@ namespace GGJ2021
                 pickablesNearby.Remove(pickable);
             }
         }
+
+        public void Startup()
+        {
+
+        }
     }
 
     public interface IPickable
@@ -69,6 +96,6 @@ namespace GGJ2021
         void OnPutDown();
         bool CanPickUp { get; }
         bool IsHeavy { get; }
-        Transform transform {get; }
+        Transform transform { get; }
     }
 }

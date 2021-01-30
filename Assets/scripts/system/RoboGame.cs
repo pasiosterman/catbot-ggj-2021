@@ -7,6 +7,7 @@ namespace GGJ2021
         public static Player Player { get { return GetTool<Player>(GameTools.Player); } }
         public static Mover PlayerMover {get {return GetTool<Mover>(GameTools.PlayerMover); } }
         public static CameraChanger CameraChanger {get {return GetTool<CameraChanger>(GameTools.CameraChanger); } }
+        public static bool ApplicationQuitting { get; set; } = false;
 
         public static void AddTool(GameTools key, object value){ UnityEngine.Debug.Log("set tool " + key); tools.SetTool(key, value); }
         public static T GetTool<T>(GameTools key)

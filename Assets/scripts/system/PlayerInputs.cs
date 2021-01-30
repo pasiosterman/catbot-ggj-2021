@@ -32,8 +32,10 @@ namespace GGJ2021
                 MovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
                 RunInput = Input.GetButton("Run");
                 JumpInput = Input.GetButton("Jump");
-
                 TurnInput = Input.GetAxis("Turn x");
+
+                if(Input.GetButtonDown("Use module"))
+                    RoboGame.Player.UseModule();
 
                 if (RoboGame.CameraChanger != null)
                 {
@@ -45,7 +47,6 @@ namespace GGJ2021
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.ThirdPerson);
                     else if (Input.GetKey(KeyCode.F4))
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.Ortoh);
-
                 }
             }
             else

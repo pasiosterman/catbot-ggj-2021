@@ -19,5 +19,10 @@ namespace GGJ2021
                 objs[i].Startup();
             }
         }
+
+        private void OnApplicationQuit()
+        {
+            RoboGame.ApplicationQuitting = true;
+        }
     }
 }
