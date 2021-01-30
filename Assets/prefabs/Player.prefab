@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &4766258283619108956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322833226270094685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7587db88272a0478d70593d409eb7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feetTransform: {fileID: 0}
 --- !u!1 &4943892868428908057
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,7 +55,7 @@ GameObject:
   - component: {fileID: 1245733709708206958}
   - component: {fileID: 7697063663610755418}
   - component: {fileID: 4047440248856373696}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarryObjects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +537,7 @@ GameObject:
   - component: {fileID: 8872410954571944067}
   - component: {fileID: 8872410954571944066}
   - component: {fileID: 8872410954571944065}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -989,6 +1002,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ce7c7fd1868a0c4cb611a29aa90eb2e, type: 3}
+--- !u!1 &1322833226270094685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1ce7c7fd1868a0c4cb611a29aa90eb2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2205299398397954060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1806072519146991591 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1ce7c7fd1868a0c4cb611a29aa90eb2e,
