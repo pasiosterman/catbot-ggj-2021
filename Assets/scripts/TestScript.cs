@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ggj2021
+namespace GGJ2021
 {
-    public class TestScript : MonoBehaviour
+    public class TestScript : MonoBehaviour, IStartup
     {
         public float speed = 10;
+
+        public bool Started { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+        public void Startup()
+        {
+            Debug.Log(GetType().Name + "started");
+        }
 
         private void Update()
         {
