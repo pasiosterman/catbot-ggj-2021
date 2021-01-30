@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PUnity.EventHandling;
+using GGJ2021.MovementEvents;
+using System;
 
 namespace GGJ2021
 {
-    public class Mover : MonoBehaviour, IStartup
+    public class Mover : MonoBehaviour, IStartup, IEventSubject<MovementEventArgs>
     {
         [Tooltip("Max speed in m/s")]
         public float speed = 5.0f;
@@ -21,8 +24,10 @@ namespace GGJ2021
         private Rigidbody _rb;
         private IsGroundedScanner _groundedScanner;
         private bool _jumpDesireReleased = false;
+        private Vector3 _previousVelocity = Vector3.zero;
 
         public Vector3 DesiredMovement { get; set; } = Vector3.zero;
+        public float DesiredTurning { get; set; } = 0.0f;
         public bool WantsToRun { get; set; }
         public bool WantsToJump { get; set; }
         public bool IsGrounded
@@ -42,6 +47,12 @@ namespace GGJ2021
             _behaviorStartup = GetComponent<BehaviorStartup>();
             _rb = GetComponent<Rigidbody>();
             _groundedScanner = GetComponentInChildren<IsGroundedScanner>();
+            _groundedScanner.OnLandedEvent = OnLanded;
+        }
+
+        private void OnLanded()
+        {
+            SendEvent(new LandedEventArgs());
         }
 
         public void ChangeState(BaseMovementState newState)
@@ -52,15 +63,23 @@ namespace GGJ2021
             CurrentState?.Entry();
         }
 
-        public void FixedUpdate()
+        private void FixedUpdate()
         {
             if (_behaviorStartup == null) return;
             if (!_behaviorStartup.Ready) return;
 
             CurrentState?.FixedExecute();
 
-            if(_jumpDesireReleased && !WantsToJump)
+            if (_jumpDesireReleased && !WantsToJump)
                 _jumpDesireReleased = false;
+        }
+
+        float _jumpDelay = 0.0f;
+
+        private void Update()
+        {
+            if (_jumpDelay > 0.0f)
+                _jumpDelay -= Time.deltaTime;
         }
 
         public void Turn(float value)
@@ -83,15 +102,56 @@ namespace GGJ2021
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0;
             _rb.AddForce(velocityChange, ForceMode.VelocityChange);
+
+            if (IsGrounded && _jumpDelay <= 0)
+            {
+                if (_previousVelocity.magnitude == 0 && desiredVeloicty.magnitude > 0)
+                    SendEvent(new StartedMoving());
+                else if (_previousVelocity.magnitude > 0 && desiredVeloicty.magnitude == 0)
+                    SendEvent(new StoppedMoving());
+
+                _previousVelocity = desiredVeloicty;
+            }
         }
 
         public void Jump()
         {
-            if(IsGrounded && !_jumpDesireReleased)
+            if (IsGrounded && !_jumpDesireReleased && _jumpDelay <= 0.0f)
             {
                 _rb.velocity = new Vector3(_rb.velocity.x, jumpForce, _rb.velocity.z);
                 _jumpDesireReleased = true;
+                SendEvent(new Jumped());
+                SendEvent(new StoppedMoving());
+                _previousVelocity = Vector3.zero;
+                _jumpDelay = 0.3f;
             }
+        }
+
+        private GenericEventHandler<MovementEventArgs> _movementEventHandler;
+        private GenericEventHandler<MovementEventArgs> MovementEventHandler
+        {
+            get
+            {
+                if (_movementEventHandler == null)
+                    _movementEventHandler = new GenericEventHandler<MovementEventArgs>(this);
+
+                return _movementEventHandler;
+            }
+        }
+
+        public void Attach(IEventListener<MovementEventArgs> listener)
+        {
+            MovementEventHandler.Attach(listener);
+        }
+
+        public void Detach(IEventListener<MovementEventArgs> listener)
+        {
+            MovementEventHandler.Detach(listener);
+        }
+
+        public void SendEvent(MovementEventArgs args)
+        {
+            MovementEventHandler.SendEvent(args);
         }
     }
 }

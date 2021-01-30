@@ -9,7 +9,7 @@ namespace GGJ2021
         public void Startup()
         {
             Mover = GetComponent<Mover>();
-            Mover.ChangeState(new TankMovementState());
+            Mover.ChangeState(new StrafeMovementState());
             RoboGame.AddTool(GameTools.Player, this);
             RoboGame.AddTool(GameTools.PlayerMover, Mover);
         }

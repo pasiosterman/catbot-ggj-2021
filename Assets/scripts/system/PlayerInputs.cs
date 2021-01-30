@@ -10,6 +10,7 @@ namespace GGJ2021
         public Vector3 MovementInput { get; private set; }
         public bool RunInput { get; private set; }
         public bool JumpInput { get; private set; }
+        public float TurnInput {get; private set; }
 
         public void Startup()
         {
@@ -32,6 +33,8 @@ namespace GGJ2021
                 RunInput = Input.GetButton("Run");
                 JumpInput = Input.GetButton("Jump");
 
+                TurnInput = Input.GetAxis("Turn x");
+
                 if (RoboGame.CameraChanger != null)
                 {
                     if (Input.GetKey(KeyCode.F1))
@@ -45,11 +48,13 @@ namespace GGJ2021
                 MovementInput = Vector3.zero;
                 RunInput = false;
                 JumpInput = false;
+                TurnInput = 0.0f;
             }
 
             RoboGame.PlayerMover.DesiredMovement = MovementInput;
             RoboGame.PlayerMover.WantsToRun = RunInput;
             RoboGame.PlayerMover.WantsToJump = JumpInput;
+            RoboGame.PlayerMover.DesiredTurning = TurnInput;
         }
     }
 }

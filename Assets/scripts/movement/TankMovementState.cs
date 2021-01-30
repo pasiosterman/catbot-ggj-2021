@@ -10,8 +10,14 @@ namespace GGJ2021
         {
             if(Context == null) return;
 
-            Context.Move(new Vector3(0, 0, Context.DesiredMovement.y), Context.WantsToRun);
-            Context.Turn(Context.DesiredMovement.x);
+            if(!Context.IsGrounded)
+                Context.Move(new Vector3(0, 0, Context.DesiredMovement.y), Context.WantsToRun);
+
+            if(Context.DesiredTurning == 0.0f)
+                Context.Turn(Context.DesiredMovement.x);
+            else
+                Context.Turn(Context.DesiredTurning);
+
             if(Context.WantsToJump)
                 Context.Jump();
         }

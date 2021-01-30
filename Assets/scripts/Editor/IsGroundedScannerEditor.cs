@@ -14,6 +14,7 @@ namespace GGJ2021
             EditorGUILayout.BeginVertical("box");
             EditorGUI.BeginDisabledGroup(true);
             GUILayout.Toggle(TypeTarget.IsGrounded, "is grounded");
+            EditorGUILayout.LabelField("ground count", TypeTarget.GroundCount.ToString());
             EditorGUI.EndDisabledGroup();
             EditorGUILayout.EndVertical();
         }
