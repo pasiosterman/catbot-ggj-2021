@@ -27,7 +27,7 @@ namespace PUnity.Serialization
                 }
                 catch (Exception e)
                 {
-                    UnityEngine.Debug.LogError(LogTags.SYSTEM_ERROR + "");
+                    UnityEngine.Debug.LogError(LogTags.SYSTEM_ERROR + e.Message);
                 }
             }
         }

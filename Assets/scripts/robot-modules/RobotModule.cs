@@ -1,26 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace GGJ2021
 {
-    public abstract class RobotModule : MonoBehaviour
+    public class RobotModule : MonoBehaviour
     {
-        public virtual void UseModule() { }
-        public virtual void OnEquipModule() { }
-        public virtual void OnUnequipModule() { }
+        public virtual RobotModules ModuleType { get { return RobotModules.None; } }
+    }
 
-        protected virtual void OnEnable()
-        {
-            Player player = GetComponentInParent<Player>();
-            player.AddModule(this);
-        }
-
-        protected virtual void OnDisable()
-        {
-            if (RoboGame.ApplicationQuitting)
-                return;
-
-            Player player = GetComponentInParent<Player>();
-            player.RemoveModule(this);
-        }
+    public enum RobotModules
+    {
+        None = 0,
+        CarryModule = 1,
+        JetbackModule = 2
     }
 }

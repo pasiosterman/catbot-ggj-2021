@@ -49,6 +49,7 @@ namespace GGJ2021
             _rb = GetComponent<Rigidbody>();
             _groundedScanner = GetComponentInChildren<IsGroundedScanner>();
             _groundedScanner.OnLandedEvent = OnLanded;
+            MovementDirection = transform.forward;
         }
 
         private void OnLanded()

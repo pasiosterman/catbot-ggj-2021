@@ -35,7 +35,7 @@ namespace GGJ2021
                 TurnInput = Input.GetAxis("Turn x");
 
                 if(Input.GetButtonDown("Use module"))
-                    RoboGame.Player.UseModule();
+                    RoboGame.Player.CarryObjectsModule.UseModule();
 
                 if (RoboGame.CameraChanger != null)
                 {

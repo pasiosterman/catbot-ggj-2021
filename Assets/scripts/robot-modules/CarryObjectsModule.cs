@@ -4,14 +4,18 @@ using UnityEngine;
 
 namespace GGJ2021
 {
-    public class CarryObjects : RobotModule, IStartup
+    public class CarryObjectsModule : RobotModule
     {
-        private readonly List<IPickable> pickablesNearby = new List<IPickable>();
-        public IPickable CurrentPickable { get; private set; }
+        public GameObject leftHand;
 
-        public override void UseModule()
+        public readonly List<IPickable> pickablesNearby = new List<IPickable>();
+        public IPickable CurrentPickable { get; private set; }
+        private Player _player;
+        float max_distance = 5.0f;
+
+        public void UseModule()
         {
-            if(CurrentPickable == null)
+            if (CurrentPickable == null)
                 PickUpNearest();
             else
                 DropCurrentPickable();
@@ -45,22 +49,41 @@ namespace GGJ2021
         {
             if (pickablesNearby.Count == 0) return null;
 
+            CleanUpBuggedOutCatsNotReallyNearby();
+
             IPickable nearest = pickablesNearby[0];
             float nearestDist = Vector3.Distance(nearest.transform.position, transform.position);
 
-            if (pickablesNearby.Count == 1)
-                return nearest;
-
-            for (int i = 1; i < pickablesNearby.Count; i++)
+            if (pickablesNearby.Count > 1)
             {
-                float dist = Vector3.Distance(pickablesNearby[i].transform.position, transform.position);
-                if (dist < nearestDist)
+                for (int i = 1; i < pickablesNearby.Count; i++)
                 {
-                    nearest = pickablesNearby[i];
-                    nearestDist = dist;
+                    float dist = Vector3.Distance(pickablesNearby[i].transform.position, transform.position);
+                    if (dist < nearestDist)
+                    {
+                        nearest = pickablesNearby[i];
+                        nearestDist = dist;
+                    }
                 }
             }
+
             return nearest;
+        }
+
+        private void CleanUpBuggedOutCatsNotReallyNearby()
+        {
+            for (int i = pickablesNearby.Count - 1; i >= 0; i--)
+            {
+                IPickable it = pickablesNearby[i];
+                if(it == null)
+                    Debug.Log("wat");
+
+                float dist = Vector3.Distance(it.transform.position, _player.transform.position);
+                Vector3 nearestDir = (it.transform.position - _player.transform.position).normalized;
+                nearestDir.y = 0.0f;
+                if (dist > max_distance || Vector3.Dot(nearestDir, transform.forward) < 0.0f)
+                    pickablesNearby.Remove(it);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -77,16 +100,20 @@ namespace GGJ2021
 
         private void OnTriggerExit(Collider other)
         {
-            IPickable pickable = other.GetComponent<IPickable>();
+            IPickable pickable = other.GetComponentInParent<IPickable>();
             if (pickable != null && pickablesNearby.Contains(pickable))
             {
                 pickablesNearby.Remove(pickable);
             }
         }
 
-        public void Startup()
-        {
+        public override RobotModules ModuleType {get{ return RobotModules.CarryModule; }}
 
+        protected void OnEnable()
+        {
+            _player = GetComponentInParent<Player>();
+            _player.CarryObjectsModule = this;
+            leftHand.gameObject.SetActive(true);
         }
     }
 

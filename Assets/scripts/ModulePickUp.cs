@@ -1,15 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace GGJ2021
 {
-    public class ItemPickUp : MonoBehaviour, IStartup
+    public class ModulePickUp : MonoBehaviour, IStartup
     {
-        public UnityEvent pickedUpEvent;
         private OneShotSoundEffectPlayer _soundEffectPlayer;
         private bool _consumed = false;
+        public RobotModules moduleType = RobotModules.None;
 
         public void Startup()
         {
@@ -19,7 +17,8 @@ namespace GGJ2021
         public void Pickup()
         {
             _consumed = true;
-            pickedUpEvent.Invoke();
+
+            RoboGame.Player.Modules.ActivateModule(moduleType);
             _soundEffectPlayer.PlayRandomOneShot();
             _soundEffectPlayer.transform.SetParent(null);
             Destroy(_soundEffectPlayer.gameObject, 5.0f);

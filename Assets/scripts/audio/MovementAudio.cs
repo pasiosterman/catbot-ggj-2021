@@ -13,7 +13,6 @@ namespace GGJ2021
         {
             if (eventArgs.GetType() == typeof(StartedMoving))
             {
-                Debug.Log("STARTED MOVING?");
                 _effectPlayer.PlayContinous("move");
                 _effectPlayer.FadeIn();
             }

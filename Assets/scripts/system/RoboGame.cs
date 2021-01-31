@@ -9,7 +9,7 @@ namespace GGJ2021
         public static CameraChanger CameraChanger {get {return GetTool<CameraChanger>(GameTools.CameraChanger); } }
         public static bool ApplicationQuitting { get; set; } = false;
 
-        public static void AddTool(GameTools key, object value){ UnityEngine.Debug.Log("set tool " + key); tools.SetTool(key, value); }
+        public static void AddTool(GameTools key, object value){ tools.SetTool(key, value); }
         public static T GetTool<T>(GameTools key)
         {
             if (tools.ContainsTool(key))
