@@ -23,15 +23,18 @@ namespace GGJ2021
             {
                 _cats.Add(cat);
 
-                for (int i = rewards.Count - 1; i >= 0 ; i--)
+                for (int i = rewards.Count - 1; i >= 0; i--)
                 {
-                    if(_cats.Count >= rewards[i].catRequirement)
+                    if (_cats.Count >= rewards[i].catRequirement)
                     {
-                        if(rewards[i].module != null)
+                        if (rewards[i].module != null)
                             rewards[i].module.gameObject.SetActive(true);
 
-                        if(rewards[i].WinGame)
+                        if (rewards[i].WinGame)
+                        {
                             RoboGame.TipWindow.AddTip("Contratulations! you found all the cats!");
+                            Invoke("loadendscreen", 3.0f);
+                        }
 
                         Debug.Log("Adding after reward tip!");
                         RoboGame.TipWindow.AddTip(rewards[i].message);
@@ -39,7 +42,7 @@ namespace GGJ2021
                     }
                 }
 
-                if(Time.time - timeStamp > 5.0f)
+                if (Time.time - timeStamp > 5.0f)
                 {
                     Cat[] arr = FindObjectsOfType<Cat>();
                     RoboGame.TipWindow.AddTip("Found cats: " + _cats.Count + " / " + arr.Length);
@@ -55,7 +58,14 @@ namespace GGJ2021
             if (cat != null && _cats.Contains(cat))
                 _cats.Remove(cat);
         }
+
+        public void loadendscreen()
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("YouWin");
+        }
     }
+
+
 
     [System.Serializable]
     public class Reward
