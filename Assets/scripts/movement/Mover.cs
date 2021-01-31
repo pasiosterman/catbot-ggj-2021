@@ -79,8 +79,10 @@ namespace GGJ2021
 
         private void Update()
         {
+            CurrentState?.Execute();
+
             if (_jumpDelay > 0.0f)
-                _jumpDelay -= Time.deltaTime;
+                _jumpDelay -= Time.smoothDeltaTime;
         }
 
         public void Turn(float value)
@@ -93,27 +95,29 @@ namespace GGJ2021
             if (_rb == null) return;
 
             direction = transform.TransformDirection(direction);
-            Vector3 desiredVeloicty = direction * speed;
+            Vector3 desiredVelocity = direction * speed;
 
-            if (run) desiredVeloicty *= runModifier;
+            if (run) desiredVelocity *= runModifier;
 
             var velocity = _rb.velocity;
-            var velocityChange = desiredVeloicty - velocity;
+            var velocityChange = desiredVelocity - velocity;
 
             velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
             velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
             velocityChange.y = 0;
             _rb.AddForce(velocityChange, ForceMode.VelocityChange);
-            MovementDirection = velocityChange.normalized;
+
+            if (desiredVelocity.magnitude > 0.0f)
+                MovementDirection = desiredVelocity.normalized;
 
             if (IsGrounded && _jumpDelay <= 0)
             {
-                if (_previousVelocity.magnitude == 0 && desiredVeloicty.magnitude > 0)
+                if (_previousVelocity.magnitude == 0 && desiredVelocity.magnitude > 0)
                     SendEvent(new StartedMoving());
-                else if (_previousVelocity.magnitude > 0 && desiredVeloicty.magnitude == 0)
+                else if (_previousVelocity.magnitude > 0 && desiredVelocity.magnitude == 0)
                     SendEvent(new StoppedMoving());
 
-                _previousVelocity = desiredVeloicty;
+                _previousVelocity = desiredVelocity;
             }
         }
 
