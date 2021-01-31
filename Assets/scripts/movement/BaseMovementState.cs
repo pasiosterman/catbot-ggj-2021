@@ -10,6 +10,7 @@ namespace GGJ2021
         public void SetContext(Mover context){Context = context; }
         public virtual void Entry() { }
         public virtual void FixedExecute() { }
+        public virtual void Execute(){ }
         public virtual void Exit() { }
     }
 }
