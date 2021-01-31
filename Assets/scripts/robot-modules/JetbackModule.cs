@@ -14,6 +14,8 @@ namespace GGJ2021
             Player player = GetComponentInParent<Player>();
             player.Mover.canJump = true;
             jetback?.SetActive(true);
+
+            RoboGame.TipWindow.AddTip("Use space key to jump");
         }
     }
 }

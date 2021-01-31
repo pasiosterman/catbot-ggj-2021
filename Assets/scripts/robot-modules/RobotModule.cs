@@ -13,6 +13,10 @@ namespace GGJ2021
     {
         None = 0,
         CarryModule = 1,
-        JetbackModule = 2
+        JetbackModule = 2,
+        OverheadModule = 3,
+        FpsModule = 4,
+        OrthoModule = 5,
+        ThirdPersonModule = 6
     }
 }

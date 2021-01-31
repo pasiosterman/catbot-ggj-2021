@@ -14,6 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2250083763195413732, guid: 2882a3f1d447bad4391a8b554fd46908,
         type: 3}
+      propertyPath: moduleName
+      value: Your left hand
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250083763195413732, guid: 2882a3f1d447bad4391a8b554fd46908,
+        type: 3}
       propertyPath: moduleType
       value: 1
       objectReference: {fileID: 0}

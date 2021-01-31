@@ -17,9 +17,24 @@ namespace GGJ2021
         {
             for (int i = 0; i < modules.Length; i++)
             {
-                if(modules[i].ModuleType == moduletype)
+                if (modules[i].ModuleType == moduletype)
+                {
+                    if (moduletype == RobotModules.OverheadModule)
+                        RoboGame.TipWindow.AddTip("Now.. to find that arm");
+
                     modules[i].gameObject.SetActive(true);
+                }
             }
+        }
+
+        public bool HasModule(RobotModules moduleType)
+        {
+            for (int i = 0; i < modules.Length; i++)
+            {
+                if (modules[i].ModuleType == moduleType)
+                    return true;
+            }
+            return false;
         }
     }
 }

@@ -12,6 +12,8 @@ namespace GGJ2021
         public bool JumpInput { get; private set; }
         public float TurnInput { get; private set; }
 
+        public Transform resetTrasform;
+
         public void Startup()
         {
             _behaviorStartup = GetComponent<BehaviorStartup>();
@@ -34,18 +36,21 @@ namespace GGJ2021
                 JumpInput = Input.GetButton("Jump");
                 TurnInput = Input.GetAxis("Turn x");
 
+                if(Input.GetButtonDown("Reset position"))
+                    RoboGame.Player.transform.position = resetTrasform.transform.position + (Vector3.up * 2.0f);
+
                 if(Input.GetButtonDown("Use module"))
-                    RoboGame.Player.CarryObjectsModule.UseModule();
+                    RoboGame.Player.CarryObjectsModule?.UseModule();
 
                 if (RoboGame.CameraChanger != null)
                 {
-                    if (Input.GetKey(KeyCode.F1))
+                    if (Input.GetKey(KeyCode.F1) && RoboGame.Player.OverheadViewEnabled)
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.Overhead);
-                    else if (Input.GetKey(KeyCode.F2))
+                    else if (Input.GetKey(KeyCode.F3) && RoboGame.Player.FirstPersonViewEnabled)
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.FirstPerson);
-                    else if (Input.GetKey(KeyCode.F3))
+                    else if (Input.GetKey(KeyCode.F2) && RoboGame.Player.ThirdPersonViewEnabled)
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.ThirdPerson);
-                    else if (Input.GetKey(KeyCode.F4))
+                    else if (Input.GetKey(KeyCode.F4) && RoboGame.Player.OrthoViewEnabled)
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.Ortoh);
                 }
             }
