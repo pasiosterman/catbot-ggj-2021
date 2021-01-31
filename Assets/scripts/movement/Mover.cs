@@ -18,6 +18,7 @@ namespace GGJ2021
         [Tooltip("Degrees in second")]
         public float turningSpeed = 100.0f;
 
+        public bool canJump = false;
         public float jumpForce = 2.0f;
 
         private BehaviorStartup _behaviorStartup;
@@ -124,6 +125,9 @@ namespace GGJ2021
 
         public void Jump()
         {
+            if (!canJump)
+                return;
+
             if (IsGrounded && !_jumpDesireReleased && _jumpDelay <= 0.0f)
             {
                 _rb.velocity = new Vector3(_rb.velocity.x, jumpForce, _rb.velocity.z);

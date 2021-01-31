@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2250083761889054480}
   - component: {fileID: 2250083761889054486}
   - component: {fileID: 2250083761889054487}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PickupSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 2250083762062418595}
   - component: {fileID: 2250083762062418604}
   - component: {fileID: 2250083762062418605}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ Transform:
   m_GameObject: {fileID: 2250083762062418607}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 2250083763195413735}
   m_RootOrder: 3
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 2250083762640889710}
   - component: {fileID: 2250083762640889708}
   - component: {fileID: 2250083762640889709}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2250083762776269194}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Floaty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,8 +359,8 @@ GameObject:
   - component: {fileID: 2250083763195413733}
   - component: {fileID: 2250083763195413734}
   - component: {fileID: 2250083763195413755}
-  m_Layer: 0
-  m_Name: PickUpBase
+  m_Layer: 11
+  m_Name: ModulePickUpBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -396,9 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eafe1e7e00691f549b0d8e8d6c9b0213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickedUpEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  moduleType: 0
 --- !u!114 &2250083763195413733
 MonoBehaviour:
   m_ObjectHideFlags: 0
