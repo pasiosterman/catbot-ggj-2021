@@ -8,6 +8,7 @@ namespace GGJ2021
         private OneShotSoundEffectPlayer _soundEffectPlayer;
         private bool _consumed = false;
         public RobotModules moduleType = RobotModules.None;
+        public string moduleName = "";
 
         public void Startup()
         {
@@ -18,13 +19,17 @@ namespace GGJ2021
         {
             _consumed = true;
 
+            if(moduleName == null)
+                moduleName = "new module";
+
+            RoboGame.TipWindow.AddTip("Picked up: " + moduleName);
             RoboGame.Player.Modules.ActivateModule(moduleType);
             _soundEffectPlayer.PlayRandomOneShot();
             _soundEffectPlayer.transform.SetParent(null);
             Destroy(_soundEffectPlayer.gameObject, 5.0f);
             Destroy(gameObject, 0.1f);
         }
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (_consumed)

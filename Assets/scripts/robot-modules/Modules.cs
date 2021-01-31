@@ -21,5 +21,15 @@ namespace GGJ2021
                     modules[i].gameObject.SetActive(true);
             }
         }
+
+        public bool HasModule(RobotModules moduleType)
+        {
+            for (int i = 0; i < modules.Length; i++)
+            {
+                if(modules[i].ModuleType == moduleType)
+                    return true;
+            }
+            return false;
+        }
     }
 }

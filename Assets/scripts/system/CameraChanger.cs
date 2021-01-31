@@ -8,55 +8,60 @@ namespace GGJ2021
         public Camera fpsCamera;
         public Camera orthoCamera;
         public Camera thirdPersonCamera;
+        public GameObject detachedHeadCamera;
 
-        public AvailableCameras CurrentCamera { get; private set; }
+        public AvailableCameras CurrentCamera { get; private set; } = AvailableCameras.None;
 
         public void Startup()
         {
             RoboGame.AddTool(GameTools.CameraChanger, this);
-            ChangeCamera(AvailableCameras.Overhead);
         }
 
         public void ChangeCamera(AvailableCameras targetCamera)
         {
-            if (CurrentCamera == targetCamera)
-                return;
+            string currentCameraName = "none";
 
+            if(currentCameraName != null)
+                currentCameraName = CurrentCamera.ToString();
+
+            Debug.Log(currentCameraName + " => " + targetCamera.ToString() );
+
+            detachedHeadCamera.SetActive(false);
             CurrentCamera = targetCamera;
             switch (targetCamera)
             {
                 case AvailableCameras.Overhead:
-                    overheadCamera.gameObject.SetActive(true);
-                    fpsCamera.gameObject.SetActive(false);
-                    orthoCamera.gameObject.SetActive(false);
-                    thirdPersonCamera.gameObject.SetActive(false);
+                    overheadCamera.enabled = true;
+                    fpsCamera.enabled = false;
+                    orthoCamera.enabled = false;
+                    thirdPersonCamera.enabled = false;
                     break;
                 case AvailableCameras.FirstPerson:
-                    overheadCamera.gameObject.SetActive(false);
-                    fpsCamera.gameObject.SetActive(true);
-                    orthoCamera.gameObject.SetActive(false);
-                    thirdPersonCamera.gameObject.SetActive(false);
+                    overheadCamera.enabled = false;
+                    fpsCamera.enabled = true;
+                    orthoCamera.enabled = false;
+                    thirdPersonCamera.enabled = false;
                     break;
                 case AvailableCameras.Ortoh:
-                    overheadCamera.gameObject.SetActive(false);
-                    fpsCamera.gameObject.SetActive(false);
-                    orthoCamera.gameObject.SetActive(true);
-                    thirdPersonCamera.gameObject.SetActive(false);
+                    overheadCamera.enabled = false;
+                    fpsCamera.enabled = false;
+                    orthoCamera.enabled = true;
+                    thirdPersonCamera.enabled = false;
                     break;
                 case AvailableCameras.ThirdPerson:
-                    overheadCamera.gameObject.SetActive(false);
-                    fpsCamera.gameObject.SetActive(false);
-                    orthoCamera.gameObject.SetActive(false);
-                    thirdPersonCamera.gameObject.SetActive(true);
+                    overheadCamera.enabled = false;
+                    fpsCamera.enabled = false;
+                    orthoCamera.enabled = false;
+                    thirdPersonCamera.enabled = true;
                     break;
                 default:
-                    overheadCamera.gameObject.SetActive(true);
-                    fpsCamera.gameObject.SetActive(false);
-                    orthoCamera.gameObject.SetActive(false);
-                    thirdPersonCamera.gameObject.SetActive(false);
+                    overheadCamera.enabled = true;
+                    fpsCamera.enabled = false;
+                    orthoCamera.enabled = false;
+                    thirdPersonCamera.enabled = false;
                     break;
             }
         }
-        public enum AvailableCameras { Overhead, FirstPerson, Ortoh, ThirdPerson }
+        public enum AvailableCameras { None, Overhead, FirstPerson, Ortoh, ThirdPerson }
     }
 }

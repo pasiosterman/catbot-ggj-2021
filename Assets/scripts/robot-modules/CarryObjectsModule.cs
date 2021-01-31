@@ -114,6 +114,7 @@ namespace GGJ2021
             _player = GetComponentInParent<Player>();
             _player.CarryObjectsModule = this;
             leftHand.gameObject.SetActive(true);
+            RoboGame.TipWindow.AddTip("Pick up cats using the F-key or left mouse button");
         }
     }
 

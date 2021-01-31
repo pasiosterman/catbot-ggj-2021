@@ -10,6 +10,11 @@ namespace GGJ2021
         public CarryObjectsModule CarryObjectsModule { get; set; }
         public Modules Modules { get; private set; }
 
+        public bool OverheadViewEnabled { get; set; } = false;
+        public bool ThirdPersonViewEnabled { get; set; } = false;
+        public bool FirstPersonViewEnabled { get; set; } = false;
+        public bool OrthoViewEnabled { get; set; } = false;
+
         public void Startup()
         {
             Modules = GetComponentInChildren<Modules>();

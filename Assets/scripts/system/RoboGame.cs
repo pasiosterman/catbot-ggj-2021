@@ -7,6 +7,7 @@ namespace GGJ2021
         public static Player Player { get { return GetTool<Player>(GameTools.Player); } }
         public static Mover PlayerMover {get {return GetTool<Mover>(GameTools.PlayerMover); } }
         public static CameraChanger CameraChanger {get {return GetTool<CameraChanger>(GameTools.CameraChanger); } }
+        public static TipWindow TipWindow {get {return GetTool<TipWindow>(GameTools.TipWindow); }}
         public static bool ApplicationQuitting { get; set; } = false;
 
         public static void AddTool(GameTools key, object value){ tools.SetTool(key, value); }
@@ -26,6 +27,7 @@ namespace GGJ2021
         PlayerInputs = 0,
         Player = 1,
         PlayerMover = 2,
-        CameraChanger = 3
+        CameraChanger = 3,
+        TipWindow = 4
     }
 }
