@@ -20,12 +20,15 @@ namespace GGJ2021
                     break;
                 case RobotModules.FpsModule:
                     player.FirstPersonViewEnabled = true;
+                    RoboGame.TipWindow.AddTip("Press F3 to enter first person view, F1 to return to overhead view");
                     break;
                 case RobotModules.ThirdPersonModule:
                     player.ThirdPersonViewEnabled = true;
+                    RoboGame.TipWindow.AddTip("Press F2 to enter third person view, F1 to return to overhead view" );
                     break;
                 case RobotModules.OrthoModule:
                     player.OrthoViewEnabled = true;
+                    RoboGame.TipWindow.AddTip("Press F4 to enter orthographic view, F1 to return to overhead view");
                     break;
                 default:
                     break;

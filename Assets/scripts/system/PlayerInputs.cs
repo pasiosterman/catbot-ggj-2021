@@ -46,9 +46,9 @@ namespace GGJ2021
                 {
                     if (Input.GetKey(KeyCode.F1) && RoboGame.Player.OverheadViewEnabled)
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.Overhead);
-                    else if (Input.GetKey(KeyCode.F2) && RoboGame.Player.FirstPersonViewEnabled)
+                    else if (Input.GetKey(KeyCode.F3) && RoboGame.Player.FirstPersonViewEnabled)
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.FirstPerson);
-                    else if (Input.GetKey(KeyCode.F3) && RoboGame.Player.ThirdPersonViewEnabled)
+                    else if (Input.GetKey(KeyCode.F2) && RoboGame.Player.ThirdPersonViewEnabled)
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.ThirdPerson);
                     else if (Input.GetKey(KeyCode.F4) && RoboGame.Player.OrthoViewEnabled)
                         RoboGame.CameraChanger.ChangeCamera(CameraChanger.AvailableCameras.Ortoh);

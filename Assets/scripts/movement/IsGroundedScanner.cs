@@ -12,6 +12,11 @@ namespace GGJ2021
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("is ground? " + other.name, other);
+
+            if(other.transform.parent != null)
+                Debug.Log("parent" + other.transform.parent.name);
+
             _groundCount++;
             if (_groundCount == 1)
                 OnLandedEvent?.Invoke();
