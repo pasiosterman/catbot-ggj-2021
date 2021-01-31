@@ -32,6 +32,7 @@ namespace GGJ2021
             if (!InputLock)
             {
                 MovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+                MovementInput.Normalize();
                 RunInput = Input.GetButton("Run");
                 JumpInput = Input.GetButton("Jump");
                 TurnInput = Input.GetAxis("Turn x");
