@@ -9,6 +9,7 @@ namespace GGJ2021
         public Camera orthoCamera;
         public Camera thirdPersonCamera;
         public GameObject detachedHeadCamera;
+        public GameObject catdropzonegraphic;
 
         public AvailableCameras CurrentCamera { get; private set; } = AvailableCameras.None;
 
@@ -27,6 +28,8 @@ namespace GGJ2021
             Debug.Log(currentCameraName + " => " + targetCamera.ToString() );
 
             detachedHeadCamera.SetActive(false);
+            catdropzonegraphic.SetActive(true);
+            
             CurrentCamera = targetCamera;
             switch (targetCamera)
             {
